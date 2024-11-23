@@ -1,0 +1,2 @@
+# Spring6Microservices_ConfigServerData
+Configuration options of the microservices included in Spring6Microservices repository
