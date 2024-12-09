@@ -20,7 +20,6 @@ springdoc:
     authorization: Basic Auth
     schema: basic
   swagger-ui:
-    #path: /swagger-ui.html
-    path: /security/custom/swagger-ui.html
+    path: /swagger-ui.html
   webjars:
     prefix: /webjars
