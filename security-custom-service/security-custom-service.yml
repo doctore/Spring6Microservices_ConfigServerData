@@ -22,4 +22,4 @@ springdoc:
   swagger-ui:
     path: /security/custom/swagger-ui.html
   webjars:
-    prefix: /security/custom/webjars
+    prefix: /webjars
