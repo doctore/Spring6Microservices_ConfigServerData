@@ -32,7 +32,7 @@ springdoc:
     # Custom property to include the documented microservices using Swagger
     documentedServices: security-custom-service
     # Custom property to include the path of the OpenAPI documentation in Json format of the documented microservices
-    microServicesPath: /api-docs
+    microservicesPath: /api-docs
   swagger-ui:
     # Swagger-ui will be accessible from the application root path directly
     use-root-path: true
