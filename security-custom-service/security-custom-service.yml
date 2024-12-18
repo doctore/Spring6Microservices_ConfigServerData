@@ -1,12 +1,16 @@
-# Required to expose the routes included actuator: actuator/routes
+# Main properties in Spring Boot to configure some general purpose services
 management:
   endpoints:
     web:
       exposure:
+        # Actuator endpoints exposed: actuator/routes
         include: health, info
 
 
 # API documentation
+# In local the URLs are:
+#   1. http://localhost:8180/security/custom/api-docs to get the information in JSON format
+#   2. http://localhost:8180/security/custom/webjars/swagger-ui/index.html to display the UI with all defined endpoints
 springdoc:
   api-docs:
     # Path of the OpenAPI documentation in Json format

@@ -1,0 +1,38 @@
+# Spring framework configuration
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: security-custom-service
+          uri: lb://security-custom-service
+          predicates:
+            - Path=/security/custom/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: security-custom-service
+                fallbackUri: forward:/failed/security-custom-service/redirect
+
+
+# Main properties in Spring Boot to configure some general purpose services
+management:
+  endpoints:
+    web:
+      exposure:
+        # Actuator endpoints exposed: actuator/routes
+        include: health, info
+
+
+# Swagger integration library used to centralize the documentation to every microservice.
+# In local the URLs are:
+#   1. http://localhost:5555/v3/api-docs to get the information in JSON format
+#   2. http://localhost:5555/webjars/swagger-ui/index.html to display the UI with all defined endpoints
+springdoc:
+  documentation:
+    # Custom property to include the documented microservices using Swagger
+    documentedServices: security-custom-service
+    # Custom property to include the path of the OpenAPI documentation in Json format of the documented microservices
+    microServicesPath: /api-docs
+  swagger-ui:
+    # Swagger-ui will be accessible from the application root path directly
+    use-root-path: true
