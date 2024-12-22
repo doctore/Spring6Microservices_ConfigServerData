@@ -8,7 +8,7 @@ management:
 
 
 # API documentation
-# In local (dev environment) the URLs are:
+# In local (dev profile) the URLs are:
 #   1. http://localhost:8180/security/custom/api-docs to get the information in JSON format
 #   2. http://localhost:8180/security/custom/webjars/swagger-ui/index.html to display the UI with all defined endpoints
 springdoc:
