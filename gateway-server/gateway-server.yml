@@ -34,5 +34,7 @@ springdoc:
     # Custom property to include the path of the OpenAPI documentation in Json format of the documented microservices
     microservicesPath: /api-docs
   swagger-ui:
+    # To disable the swagger-ui default petstore url
+    disable-swagger-default-url: true
     # Swagger-ui will be accessible from the application root path directly
     use-root-path: true
