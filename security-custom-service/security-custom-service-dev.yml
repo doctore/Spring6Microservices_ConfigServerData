@@ -13,6 +13,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 
+# Encryption configuration
+encrypt:
+  # Raw encryptionSecret: 841d8A6C80C#A4FcAf32D5367t1!C53b
+  customKey: "{cipher}bf7c79f1a7cbd56cb1f10ccc0c8e6440ba552315e86789253ede14e62a4f007ea680136668b4b95ace78506e9c247bcf20b2a88da4baf5c111e6396e67c69236"
+
+
 # Service registration and discovery
 eureka:
   client:
