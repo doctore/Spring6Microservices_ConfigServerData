@@ -12,6 +12,15 @@ spring:
               args:
                 name: security-custom-service
                 fallbackUri: forward:/failed/security-custom-service/redirect
+        - id: security-oauth-service
+          uri: lb://security-oauth-service
+          predicates:
+            - Path=/security/oauth/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: security-oauth-service
+                fallbackUri: forward:/failed/security-oauth-service/redirect
 
 
 # Main properties in Spring Boot to configure some general purpose services
@@ -21,6 +30,10 @@ management:
       exposure:
         # Actuator endpoints exposed: actuator/routes
         include: health, info
+  tracing:
+    sampling:
+      # To log traceId and spanId in every request
+      probability: 1.0
 
 
 # Swagger integration library used to centralize the documentation to every microservice.
@@ -29,8 +42,8 @@ management:
 springdoc:
   documentation:
     # Custom property to include the documented microservices using Swagger
-    documentedServices: security-custom-service
-    # Custom property to include the path of the OpenAPI documentation in Json format of the documented microservices
+    documentedServices: security-custom-service, security-oauth-service
+    # Custom property to include the path of the OpenAPI documentation in JSON format of the documented microservices
     microservicesPath: /api-docs
   swagger-ui:
     # To disable the swagger-ui default petstore url

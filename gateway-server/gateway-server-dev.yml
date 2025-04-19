@@ -13,16 +13,8 @@ eureka:
     # from its registry. This value should be greater than leaseRenewalIntervalInSeconds
     leaseExpirationDurationInSeconds: 60
     # Indicates the interval of heartbeats that the client sends to the server. The default value is 30 seconds
-    # which means that the client will send one heartbeat every 30 seconds.
+    # that means that the client will send one heartbeat every 30 seconds.
     leaseRenewalIntervalInSeconds: 45
     # Register the IP of the service rather than the server name (useful when there is no a server-based
-    # environment where a service is assigned a DNS-backed host name, usually in Docker for example)
+    # environment where a service is assigned a DNS-backed host name, usually in Docker, for example)
     preferIpAddress: true
-
-
-# Main properties in Spring Boot to configure some general purpose services
-management:
-  tracing:
-    sampling:
-      # To log traceId and spanId in every request
-      probability: 1.0
