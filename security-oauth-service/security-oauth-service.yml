@@ -12,9 +12,14 @@ management:
 
 
 # API documentation
+#
 # In local the URLs are:
 #   1. http://localhost:8181/security/oauth/api-docs to get the information in JSON format
 #   2. http://localhost:8181/security/oauth/swagger-ui/index.html to display the UI with all defined endpoints
+#
+# Using dev profile, the URLs are:
+#   1. http://localhost:5555/security/oauth/api-docs
+#   2. http://localhost:5555/security/oauth/swagger-ui/index.html
 springdoc:
   api-docs:
     # Path of the OpenAPI documentation in JSON format
