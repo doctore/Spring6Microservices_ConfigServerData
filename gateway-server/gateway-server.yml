@@ -30,7 +30,7 @@ log:
       # Comma-separated HTTP methods to include the request body in logs
       httpMethods: PATCH,POST,PUT
       # Comma-separated URLs (without: protocol, domain and port) whose body will not be added to the logs (mainly to avoid exposing sensitive data)
-      pathToAvoidLogBody: /security/custom/authentication/login,/security/custom/authentication/login/token
+      pathsToAvoidLogBody: /security/custom/authentication/login,/security/custom/authentication/login/token
 
 
 # Main properties in Spring Boot to configure some general purpose services
