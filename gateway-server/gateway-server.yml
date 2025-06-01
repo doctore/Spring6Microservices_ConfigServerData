@@ -55,9 +55,10 @@ management:
       probability: 1.0
 
 
-# Swagger integration library used to centralize the documentation to every microservice.
-# In local (dev profile) the URL is:
-#   1. http://localhost:5555/swagger-ui/index.html to display the UI with all defined endpoints
+# API documentation
+#
+# Using dev profile, the URL to display the UI with all defined endpoints is:
+#   1. http://localhost:5555/swagger-ui/index.html
 springdoc:
   documentation:
     # Custom property to include the documented microservices using Swagger
