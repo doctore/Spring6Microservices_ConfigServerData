@@ -3,6 +3,15 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: order-service
+                fallbackUri: forward:/failed/order-service/redirect
         - id: security-custom-service
           uri: lb://security-custom-service
           predicates:
@@ -52,7 +61,7 @@ management:
 springdoc:
   documentation:
     # Custom property to include the documented microservices using Swagger
-    documentedServices: security-custom-service,security-oauth-service
+    documentedServices: order-service,security-custom-service,security-oauth-service
     # Custom property to include the path of the OpenAPI documentation in JSON format of the documented microservices
     microservicesPath: /api-docs
   swagger-ui:

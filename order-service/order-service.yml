@@ -1,0 +1,39 @@
+# Main properties in Spring Boot to configure some general purpose services
+management:
+  endpoints:
+    web:
+      exposure:
+        # Actuator endpoints exposed: actuator/routes
+        include: health, info
+  tracing:
+    sampling:
+      # To log traceId and spanId in every request
+      probability: 1.0
+
+
+# API documentation
+#
+# In local the URLs are:
+#   1. http://localhost:8182/order/api-docs to get the information in JSON format
+#   2. http://localhost:8182/order/swagger-ui/index.html to display the UI with all defined endpoints
+#
+# Using dev profile, the URLs are:
+#   1. http://localhost:5555/order/api-docs
+#   2. http://localhost:5555/order/swagger-ui/index.html
+springdoc:
+  api-docs:
+    # Path of the OpenAPI documentation in JSON format
+    path: /order/api-docs
+  documentation:
+    apiVersion: 1.0
+    title: Order Service Rest Api
+    description: Services used to manage the orders
+  # Custom properties to define security configuration for documented API
+  security:
+    authorization: Basic Auth
+    schema: basic
+  swagger-ui:
+    # To disable the swagger-ui default petstore url
+    disable-swagger-default-url: true
+    # Custom path of the swagger-ui HTML documentation
+    path: /order/swagger-ui.html
