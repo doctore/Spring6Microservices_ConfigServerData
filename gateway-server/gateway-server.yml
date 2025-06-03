@@ -2,34 +2,36 @@
 spring:
   cloud:
     gateway:
-      routes:
-        - id: order-service
-          uri: lb://order-service
-          predicates:
-            - Path=/order/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: order-service
-                fallbackUri: forward:/failed/order-service/redirect
-        - id: security-custom-service
-          uri: lb://security-custom-service
-          predicates:
-            - Path=/security/custom/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: security-custom-service
-                fallbackUri: forward:/failed/security-custom-service/redirect
-        - id: security-oauth-service
-          uri: lb://security-oauth-service
-          predicates:
-            - Path=/security/oauth/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: security-oauth-service
-                fallbackUri: forward:/failed/security-oauth-service/redirect
+      server:
+        webflux:
+          routes:
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/order/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: order-service
+                    fallbackUri: forward:/failed/order-service/redirect
+            - id: security-custom-service
+              uri: lb://security-custom-service
+              predicates:
+                - Path=/security/custom/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: security-custom-service
+                    fallbackUri: forward:/failed/security-custom-service/redirect
+            - id: security-oauth-service
+              uri: lb://security-oauth-service
+              predicates:
+                - Path=/security/oauth/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: security-oauth-service
+                    fallbackUri: forward:/failed/security-oauth-service/redirect
 
 
 # Custom properties to manage how the internal filter should manage the data to include in the logs
