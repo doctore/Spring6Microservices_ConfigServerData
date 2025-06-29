@@ -26,6 +26,18 @@ spring:
           client-secret: "{cipher}1274c88a1340ad50f1199fd477c1406e4d020ca321a4b27443d7df371cc83262d9688c3e883141cf08e04878d85e42b2"
 
 
+# Custom security configuration
+security:
+  # CORS configuration
+  cors:
+    # Enable cross-origin request handling for the specified path pattern
+    mapping: /**
+    # Comma separated HTTP methods to allow
+    allowedMethods: DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+    # Comma separated origins for which cross-origin requests are allowed from a browser
+    allowedOrigins: "*"
+
+
 # Service registration and discovery
 eureka:
   client:
