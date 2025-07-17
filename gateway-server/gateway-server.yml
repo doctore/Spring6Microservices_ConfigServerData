@@ -5,6 +5,15 @@ spring:
       server:
         webflux:
           routes:
+            - id: invoice-service
+              uri: lb://invoice-service
+              predicates:
+                - Path=/invoice/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: invoice-service
+                    fallbackUri: forward:/failed/invoice-service/redirect
             - id: order-service
               uri: lb://order-service
               predicates:
@@ -64,7 +73,7 @@ management:
 springdoc:
   documentation:
     # Custom property to include the documented microservices using Swagger
-    documentedServices: order-service,security-custom-service,security-oauth-service
+    documentedServices: invoice-service,order-service,security-custom-service,security-oauth-service
     # Custom property to include the path of the OpenAPI documentation in JSON format of the documented microservices
     microservicesPath: /api-docs
   swagger-ui:
