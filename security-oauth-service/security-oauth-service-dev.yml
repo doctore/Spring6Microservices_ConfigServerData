@@ -1,25 +1,10 @@
-# Spring framework configuration
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/spring6
-    username: spring6
-    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
-    # Getting the value with POST localhost:8888/encrypt and the password in its body (using config-server)
-    # Raw password: spring6
-    password: "{cipher}c8e1f3a8e0f5d7246a0dcbe620b97de51b580a1ef16f80ffafd3989920287278"
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-
-
-# Security configuration
-security:
-  # JWT configuration
-  jwk:
-    id: 'dev-57ba-4f7c-b2ac-16c87163c90d'
-    public: classpath:/jwt/app.pub
-    private: classpath:/jwt/app.key
+# Internal caches used by the microservice
+cache:
+  # To manage the configuration of the applications included in the microservice
+  registeredClient:
+    entryCapacity: 2
+    expireInSeconds: 3600
+    name: registeredClientCache
 
 
 # Service registration and discovery
@@ -44,15 +29,6 @@ eureka:
     preferIpAddress: true
 
 
-# Internal caches used by the microservice
-cache:
-  # To manage the configuration of the applications included in the microservice
-  registeredClient:
-    entryCapacity: 2
-    expireInSeconds: 3600
-    name: registeredClientCache
-
-
 # Configure the logs
 logging:
   level:
@@ -60,3 +36,27 @@ logging:
       springframework:
         # Set the level of the Spring Security package for debugging purpose
         security: trace
+
+
+# Security configuration
+security:
+  # JWT configuration
+  jwk:
+    id: 'dev-57ba-4f7c-b2ac-16c87163c90d'
+    public: classpath:/jwt/app.pub
+    private: classpath:/jwt/app.key
+
+
+# Spring framework configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring6
+    username: spring6
+    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
+    # Getting the value with POST localhost:8888/encrypt and the password in its body (using config-server)
+    # Raw password: spring6
+    password: "{cipher}c8e1f3a8e0f5d7246a0dcbe620b97de51b580a1ef16f80ffafd3989920287278"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

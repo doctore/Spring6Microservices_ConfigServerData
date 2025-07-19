@@ -1,3 +1,26 @@
+# Custom properties to manage how the internal filter should manage the data to include in the logs
+log:
+  endpoints:
+    body:
+      # Comma-separated HTTP methods to include the request body in logs
+      httpMethods: PATCH,POST,PUT
+      # Comma-separated URLs (without: protocol, domain and port) whose body will not be added to the logs (mainly to avoid exposing sensitive data)
+      pathsToAvoidLogBody: /security/custom/authentication/login,/security/custom/authentication/login/token
+
+
+# Main properties in Spring Boot to configure some general purpose services
+management:
+  endpoints:
+    web:
+      exposure:
+        # Actuator endpoints exposed: actuator/routes
+        include: health, info
+  tracing:
+    sampling:
+      # To log traceId and spanId in every request
+      probability: 1.0
+
+
 # Spring framework configuration
 spring:
   cloud:
@@ -41,29 +64,6 @@ spring:
                   args:
                     name: security-oauth-service
                     fallbackUri: forward:/failed/security-oauth-service/redirect
-
-
-# Custom properties to manage how the internal filter should manage the data to include in the logs
-log:
-  endpoints:
-    body:
-      # Comma-separated HTTP methods to include the request body in logs
-      httpMethods: PATCH,POST,PUT
-      # Comma-separated URLs (without: protocol, domain and port) whose body will not be added to the logs (mainly to avoid exposing sensitive data)
-      pathsToAvoidLogBody: /security/custom/authentication/login,/security/custom/authentication/login/token
-
-
-# Main properties in Spring Boot to configure some general purpose services
-management:
-  endpoints:
-    web:
-      exposure:
-        # Actuator endpoints exposed: actuator/routes
-        include: health, info
-  tracing:
-    sampling:
-      # To log traceId and spanId in every request
-      probability: 1.0
 
 
 # API documentation
