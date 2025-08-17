@@ -1,0 +1,79 @@
+# Service registration and discovery
+eureka:
+  client:
+    # Pull down a local copy of the registry
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://registry-server:8761/eureka/}
+  instance:
+    # Indicates the duration the server waits since it received the last heartbeat before it can evict an instance
+    # from its registry. This value should be greater than leaseRenewalIntervalInSeconds
+    leaseExpirationDurationInSeconds: 60
+    # Indicates the interval of heartbeats that the client sends to the server. The default value is 30 seconds
+    # that means that the client will send one heartbeat every 30 seconds.
+    leaseRenewalIntervalInSeconds: 45
+    # Register the IP of the service rather than the server name (useful when there is no a server-based
+    # environment where a service is assigned a DNS-backed host name, usually in Docker, for example)
+    preferIpAddress: true
+
+
+# gRPC client and server configuration
+grpc:
+  client:
+    # Time in seconds waiting for the client to become terminated, giving up if the timeout is reached.
+    # 0 means no value
+    awaitTerminationInSeconds: 30
+    # Time in seconds waiting for a response from the server after invoking any method on the client side, giving up if the timeout is reached.
+    # 0 means no value
+    withDeadlineAfterInSeconds: 30
+  server:
+    host: ${GRPC_SERVER_HOST:order-service}
+    port: ${GRPC_SERVER_PORT:8070}
+
+
+# Configuration for external REST requests
+rest:
+  connect:
+    timeoutInMilliseconds: 5000
+  read:
+    timeoutInMilliseconds: 30000
+  response:
+    timeoutInMilliseconds: 30000
+  write:
+    timeoutInMilliseconds: 30000
+
+
+# Custom security configuration
+security:
+  # Configuration used to connect to the security microservice
+  authorizationServer:
+    authenticationInformation: ${SECURITY_SERVER_CHECK:http://gateway-server:5555/security/custom/authorization/check_token}
+    clientId: Spring6Microservices
+    # Raw password: Spring6Microservices
+    clientPassword: "{cipher}1274c88a1340ad50f1199fd477c1406e4d020ca321a4b27443d7df371cc83262d9688c3e883141cf08e04878d85e42b2"
+  # CORS configuration
+  cors:
+    # Enable cross-origin request handling for the specified path pattern
+    mapping: /**
+    # Comma separated HTTP methods to allow
+    allowedMethods: DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+    # Comma separated origins for which cross-origin requests are allowed from a browser
+    allowedOrigins: "*"
+
+
+# Spring framework configuration
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://host.docker.internal:5432/spring6}
+    username: spring6
+    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
+    # Getting the value with POST localhost:8888/encrypt and the password in its body (using config-server)
+    # Raw password: spring6
+    password: "{cipher}c8e1f3a8e0f5d7246a0dcbe620b97de51b580a1ef16f80ffafd3989920287278"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
